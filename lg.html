@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>INIMA Looking Glass</title>
+  <link rel="stylesheet" type="text/css" href="lg.css">
+</head>
+
+<body>
+<div align="center">
+
+<div class="title">INIMA Looking Glass</div>
+
+<form action="" method="post">
+<table cellpadding="2" cellspacing="2" width="600">
+  <tr>
+    <td class="heading">Router:</td>
+    <td class="heading">Command:</td>
+    <td class="heading">Parameter:</td>
+    <td><input type="reset" value="Reset " /></td>
+  </tr>
+
+  <tr>
+    <td bgcolor="#ffffcc" valign="top">
+      <select name="router">
+        <?php
+        include 'routers.php';
+        while (list($host, $name) = each($arr_routers))
+          { 
+            $select = ($host==$router ? 'selected' : '');
+            print "
+        <option value='$host' $select>$name</option>
+";
+          } 
+        ?>
+      </select>
+    </td>
+    <td bgcolor="#ffffcc">
+      <select name="query">
+        <?php
+        include 'queries.php';
+        while (list($query_value, $query_name) = each($arr_queries))
+          { 
+            $select = ($query_value==$query ? 'selected' : '');
+            print "
+        <option value='$query_value' $select>$query_name</option>
+";
+          } 
+        ?>
+      </select>
+    </td>
+    <td bgcolor="#ffffcc" valign="top">
+      <input type="text" name="params" value="<?php print $params; ?>" size="25" />
+    </td>
+    <td><input type="submit" value="Submit" /></td>
+  </tr>
+
+  <tr>
+    <td colspan="4">
+      <?php get_output(); ?>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="4" class="copyright">
+      <?php include 'copying.html'; ?>
+    </td>
+  </tr>
+</table>
+</form>
+
+</div>
+</body>
+</html>
